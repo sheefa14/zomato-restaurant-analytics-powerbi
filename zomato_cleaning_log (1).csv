@@ -1,0 +1,21 @@
+step_id,column,action,reason,notes
+1,url,Removed,Not required for dashboard analysis,Excluded from analytical model
+2,address,Removed,Not required for dashboard analysis,Excluded from analytical model
+3,reviews_list,Removed,High-cardinality text not used in dashboard,Excluded from analytical model
+4,menu_item,Removed,Not required for dashboard analysis,Excluded from analytical model
+5,name,Text cleanup,Standardize restaurant names/spacing,Retained restaurant identifier field
+6,online_order,Validated categorical values,Ensure Yes/No consistency,Used Yes/No in analysis
+7,book_table,Validated categorical values,Ensure Yes/No consistency,Used Yes/No in analysis
+8,rate,Transformed to numeric rating,Convert values such as 4.1/5 into 4.1,Non-numeric/unrated source values treated as null
+9,votes,Converted to whole number,Enable aggregation and ranking,Used restaurant-level vote measure to avoid duplicate-row summation
+10,location,Text cleanup,Standardize location values,No material missing-location issue identified during profiling
+11,rest_type,Missing-value handling,Prevent blank categories in analysis,Missing values handled as Unknown during cleaning
+12,dish_liked,Missing-value handling,Preserve missing information without inventing preferences,Blank means no recorded dish preference
+13,cuisines,Text cleanup,Prepare cuisine field for analysis,Whitespace cleaned before cuisine normalization
+14,cuisines,Split by comma into rows in Cuisine_Analysis,Enable individual cuisine analysis,Main restaurant-level table grain preserved
+15,approx_cost(for two people),Converted to numeric,Enable pricing analysis,Comma separators removed before numeric conversion
+16,price_band,Created derived category,Enable price-segment comparison,Categories include Budget, Mid-range, Premium and Luxury
+17,rating_band,Created derived category,Enable rating-segment comparison,Derived from cleaned numeric rating
+18,duplicate_records,Duplicate validation/removal,Prevent exact duplicate records from inflating row counts,Duplicates were reviewed before removal
+19,main_model,Grain validation,Protect restaurant-level metrics,Main table treated as restaurant listing/record grain
+20,Cuisine_Analysis,separate analytical table,Preserve main-table grain while analyzing multi-cuisine restaurants,One row represents a restaurant-cuisine relationship
